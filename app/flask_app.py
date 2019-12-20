@@ -12,6 +12,11 @@ tasks = [
         'id': 2,
         'title': 'More Openshift stuff',
         'description': 'contains more stuff'
+    },
+    {
+        'id': 3,
+        'title': 'Linux stuff',
+        'description': 'contains Linux stuff'
     }
 ]
 
