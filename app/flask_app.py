@@ -10,7 +10,7 @@ tasks = [
     },
     {
         'id': 2,
-        'title': 'More Openshift stuff',
+        'title': 'More stuff',
         'description': 'contains more stuff'
     },
     {
