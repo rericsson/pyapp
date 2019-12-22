@@ -60,7 +60,7 @@ pipeline {
                 }
             }
         }
-        stage('Create Image Builder') {
+        stage('Create Build Config') {
             when {
                 expression {
                     openshift.withCluster() {
