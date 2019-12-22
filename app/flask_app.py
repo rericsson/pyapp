@@ -17,6 +17,11 @@ tasks = [
         'id': 3,
         'title': 'Linux stuff',
         'description': 'contains Linux stuff'
+    },
+    {
+        'id': 4,
+        'title': 'Windows stuff',
+        'description': 'contains Windows stuff'
     }
 ]
 
