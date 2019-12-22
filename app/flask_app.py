@@ -20,8 +20,8 @@ tasks = [
     },
     {
         'id': 4,
-        'title': 'Windows stuff',
-        'description': 'contains Windows stuff'
+        'title': 'Mac stuff',
+        'description': 'contains Mac stuff'
     }
 ]
 
