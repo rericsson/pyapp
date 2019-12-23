@@ -1,35 +1,27 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 from pymongo import MongoClient
 
 app = Flask(__name__)
 
-tasks = [
-    {
-        'id': 1,
-        'title': 'Openshift stuff',
-        'description': 'contains lots of stuff'
-    },
-    {
-        'id': 2,
-        'title': 'More stuff',
-        'description': 'contains more stuff'
-    },
-    {
-        'id': 3,
-        'title': 'Linux stuff',
-        'description': 'contains Linux stuff'
-    },
-    {
-        'id': 4,
-        'title': 'Mac stuff',
-        'description': 'contains Mac stuff'
-    }
-]
+client = MongoClient()
+db = client.geojson_flask
+geodata_collection = db.geodata
+
+@app.route('/geojson-features', methods=['GET'])
+def get_all_points():
+    features = []
+    for geo_feature in geodata_collection.find({}):
+        features.append({
+            "type": "Feature",
+            "geometry": {
+                "type": geo_feature['geometry']['type'],
+                "coordinates": geo_feature['geometry']['coordinates']
+            }
+        })
 
 @app.route('/', methods=['GET'])
-def get_tasks():
-    client = MongoClient()
-    return jsonify({'tasks': tasks})
+def main():
+    return render_template('main.html')
 
 if __name__ == 'main':
     app.run(host='0.0.0.0')
