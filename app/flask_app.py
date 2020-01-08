@@ -1,6 +1,5 @@
 import os
 import sys
-import logging
 from flask import Flask, jsonify, render_template
 from flask_debugtoolbar import DebugToolbarExtension
 from pymongo import MongoClient
@@ -9,12 +8,11 @@ app = Flask(__name__)
 try:
     debug = os.environ['FLASK_ENV']
     if debug == 'development':
-        logging.info("FLASK_ENV=development")
-        app.debug = True
+        app.logger.info("FLASK_ENV=development")
         app.secret_key = '123456789'
         toolbar = DebugToolbarExtension(app)
 except KeyError:
-    logging.info("FLASK_ENV not set")
+    app.logger.info("FLASK_ENV not set")
 
 try:
     database_name = os.environ['database_name']
@@ -42,7 +40,7 @@ def get_all_points():
 
 @app.route('/', methods=['GET'])
 def main():
-    logging.warning("Message in Flask Debugger")
+    app.logger.warning("Message in Flask Debugger")
     return render_template('main.html', database_name=database_name)
 
 if __name__ == 'main':
