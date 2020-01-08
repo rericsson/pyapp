@@ -6,9 +6,15 @@ from flask_debugtoolbar import DebugToolbarExtension
 from pymongo import MongoClient
 
 app = Flask(__name__)
-app.debug = True
-app.secret_key = '123456789'
-toolbar = DebugToolbarExtension(app)
+try:
+    debug = os.environ['FLASK_ENV']
+    if debug == 'development':
+        logging.info("FLASK_ENV=development")
+        app.debug = True
+        app.secret_key = '123456789'
+        toolbar = DebugToolbarExtension(app)
+except KeyError:
+    logging.info("FLASK_ENV not set")
 
 try:
     database_name = os.environ['database_name']
