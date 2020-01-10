@@ -138,7 +138,9 @@ pipeline {
                                 openshift.selector('svc', '${TEMPLATE_NAME}').delete()
                                 openshift.selector('route', '${TEMPLATE_NAME}').delete()
                             }
+                        openshift.verbose()
                         openshift.newApp("${TEMPLATE_NAME}:${STAGE_TAG}").narrow("svc").expose("--port=${PORT}")
+                        openshift.verbose(false)
                         }
                     }
                 } 
