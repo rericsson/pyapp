@@ -139,7 +139,12 @@ pipeline {
                                 openshift.selector('route', '${TEMPLATE_NAME}').delete()
                             }
                         openshift.verbose()
-                        openshift.newApp("${TEMPLATE_NAME}:${STAGE_TAG}").narrow("svc").expose("--port=${PORT}")
+                        def app = openshift.newApp("${TEMPLATE_NAME}:${STAGE_TAG}")
+                        def dc = app.narrow('dc')
+                        def dcmap = dc.object()
+                        echo "${dcmap}"
+                        // expose the service
+                        app.narrow("svc").expose("--port=${PORT}")
                         openshift.verbose(false)
                         }
                     }
