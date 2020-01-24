@@ -23,7 +23,10 @@ except KeyError:
     print("Error: please set the database env variables", file=sys.stderr)
     sys.exit(1)
 
-client = MongoClient(database_uri, username=database_username, password=database_password)
+client = MongoClient(database_uri,
+                     username=database_username,
+                     password=database_password,
+                     authSource=database_name)
 db = client.pyapp
 geodata_collection = db.geodata
 
