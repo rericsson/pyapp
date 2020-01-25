@@ -139,9 +139,10 @@ pipeline {
                                 openshift.selector('route', '${TEMPLATE_NAME}').delete()
                             }
                         def app = openshift.newApp("${TEMPLATE_NAME}:${STAGE_TAG}")
-                        echo "app is a ${app.kind} with name ${app.metadata.name}"
                         // expose the service
                         app.narrow("svc").expose("--port=${PORT}")
+                        def dc = app.narrow('dc').object()
+                        echo "dc is a ${dc.kind} with name ${dc.metadata.name}"
                         }
                     }
                 } 
