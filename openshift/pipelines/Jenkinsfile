@@ -143,7 +143,7 @@ pipeline {
                         app.narrow("svc").expose("--port=${PORT}")
                         // add the environment variables for the app
                         println openshift.raw('version').out
-                        println openshift.raw('set', 'env', 'dc/python-nginx', 'password=pyapp').out
+                        println openshift.raw('set', 'env', 'dc/python-nginx', 'password=pyapp', 'database_name=pyapp', 'uri=mongodb://172.30.231.147:27017','username=pyapp').out
                         }
                     }
                 } 
