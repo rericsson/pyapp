@@ -141,6 +141,8 @@ pipeline {
                         def app = openshift.newApp("${TEMPLATE_NAME}:${STAGE_TAG}")
                         // expose the service
                         app.narrow("svc").expose("--port=${PORT}")
+                        // add the environment variables for the app
+                        println openshift.raw('version').out
                         }
                     }
                 } 
