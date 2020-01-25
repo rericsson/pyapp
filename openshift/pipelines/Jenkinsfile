@@ -138,15 +138,9 @@ pipeline {
                                 openshift.selector('svc', '${TEMPLATE_NAME}').delete()
                                 openshift.selector('route', '${TEMPLATE_NAME}').delete()
                             }
-                        openshift.verbose()
                         def app = openshift.newApp("${TEMPLATE_NAME}:${STAGE_TAG}")
-                        def dc = app.narrow('dc')
-                        def dcmap = dc.object()
-                        // dcmap.spec.template.spec.containers[0].envFrom.secretRef.name = "mongodb-persistent-5z5nn-credentials-gbcig"
-                        echo "${dcmap}"
                         // expose the service
                         app.narrow("svc").expose("--port=${PORT}")
-                        openshift.verbose(false)
                         }
                     }
                 } 
