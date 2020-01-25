@@ -141,8 +141,6 @@ pipeline {
                         def app = openshift.newApp("${TEMPLATE_NAME}:${STAGE_TAG}")
                         // expose the service
                         app.narrow("svc").expose("--port=${PORT}")
-                        def dc = app.narrow('dc').object()
-                        echo "dc is a ${dc.kind} with name ${dc.metadata.name}"
                         }
                     }
                 } 
