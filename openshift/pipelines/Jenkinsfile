@@ -134,6 +134,9 @@ pipeline {
                     openshift.withCluster() {
                         openshift.withProject(STAGE_PROJECT) {
                             if (openshift.selector('dc', '${TEMPLATE_NAME}').exists()) {
+                                // get the dc
+                                def dc = openshift.selector('dc', '${TEMPLATE_NAME}')
+                                echo "dc is a ${dc.kind} with name ${dc.metadata.name}"
                                 openshift.selector('dc', '${TEMPLATE_NAME}').delete()
                                 openshift.selector('svc', '${TEMPLATE_NAME}').delete()
                                 openshift.selector('route', '${TEMPLATE_NAME}').delete()
