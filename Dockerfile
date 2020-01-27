@@ -10,11 +10,11 @@ RUN apk add --no-cache python3 && \
     rm -r /root/.cache
 
 # --- Work Directory ---
-WORKDIR /usr/src/app
+WORKDIR /usr/src
 
 # --- Python Setup ---
 ADD . .
-RUN pip install -r app/requirements.pip
+RUN pip install -r requirements.pip
 
 # --- Nginx Setup ---
 COPY config/nginx/default.conf /etc/nginx/conf.d/
@@ -25,4 +25,4 @@ RUN addgroup nginx root
 
 # --- Expose and CMD ---
 EXPOSE 8081
-CMD gunicorn --bind 0.0.0.0:5000 wsgi --chdir /usr/src/app/app & nginx -g "daemon off;"
+CMD gunicorn --bind 0.0.0.0:5000 'app:create_app()' & nginx -g "daemon off;"
