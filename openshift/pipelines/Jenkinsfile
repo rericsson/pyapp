@@ -25,6 +25,7 @@ pipeline {
                 pip install virtualenv
                 virtualenv --no-site-packages .
                 source bin/activate
+                pwd
                 pip install -r requirements.pip
                 deactivate
                 """
