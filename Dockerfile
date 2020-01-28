@@ -14,8 +14,6 @@ WORKDIR /usr/src
 
 # --- Python Setup ---
 ADD . .
-RUN pwd
-RUN ls -la
 RUN pip install -r requirements.pip
 
 # --- Nginx Setup ---
